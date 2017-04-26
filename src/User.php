@@ -76,11 +76,12 @@ class User
         return false;
     }
 
-    public function delete(mysqli $connection) {
-        if($this->id != -1) {
+    public function delete(mysqli $connection)
+    {
+        if ($this->id != -1) {
             $sql = "DELETE FROM users WHERE id= $this->id";
             $result = $connection->query($sql);
-            if($result == true) {
+            if ($result == true) {
                 $this->id = -1;
                 return true;
             }
@@ -89,9 +90,36 @@ class User
         return true;
     }
 
-    static public function loadUserByID(mysqli $connection, $id)
+    public function login()
     {
-        $sql = "SELECT * FROM users where id = $id";
+        $_SESSION['user_id'] = $this->id;
+    }
+
+    public function loadUser(mysqli $connection, $email, $password)
+    {
+        $sql = "SELECT * FROM users where email = '$email'";
+        $result = $connection->query($sql);
+        if ($result) {
+            if ($result == true and $result->num_rows == 1) {
+                $row = $result->fetch_assoc();
+
+                if (password_verify($password, $row['hashed_password'])) {
+                    $this->id = $row['id'];
+                    $this->email = $row['email'];
+                    $this->username = $row['username'];
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        } else {
+            return false;
+        }
+    }
+
+    static public function loadUserById(mysqli $connection, $id)
+    {
+        $sql = "SELECT * FROM users where email = $id";
         $result = $connection->query($sql);
         if ($result == true and $result->num_rows == 1) {
             $row = $result->fetch_assoc();

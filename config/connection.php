@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "coderslab";
-$baseName = "twitter";
+$baseName = "sharenews";
 
 
 $conn = new mysqli($servername, $username, $password, $baseName);
