@@ -1,1 +1,3 @@
 # ShareNews
+
+Serwis społecznościowy tworzony na warsztach coderslab. Praca w toku...
