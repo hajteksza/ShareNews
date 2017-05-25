@@ -1,7 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: kajetanszafran
- * Date: 25.04.2017
- * Time: 16:29
- */
+include('src/User.php');
+include('config/connection.php');
+if ($_SERVER['REQUEST_METHOD'] == "GET") {
+    if ($_GET['id']) {
+        $user = new User;
+        $arr = $user->loadUserById($conn, $_GET['id']);
+        var_dump($arr);
+    }
+}

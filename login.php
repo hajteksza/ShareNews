@@ -3,9 +3,9 @@ require('config/connection.php');
 require('src/User.php');
 
 session_start();
-//if (isset($_SESSION['userId'])) {
-//header('Location: main.php');
-//}
+if (isset($_SESSION['userId'])) {
+    header('Location: main.php');
+}
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (isset($_POST['usernamesignup']) and isset($_POST['emailsignup']) and isset($_POST['passwordsignup']) and isset($_POST['passwordsignup_confirm'])) {

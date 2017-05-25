@@ -117,9 +117,9 @@ class User
         }
     }
 
-    static public function loadUserById(mysqli $connection, $id)
+    public function loadUserById(mysqli $connection, $id)
     {
-        $sql = "SELECT * FROM users where email = $id";
+        $sql = "SELECT * FROM users where id= $id";
         $result = $connection->query($sql);
         if ($result == true and $result->num_rows == 1) {
             $row = $result->fetch_assoc();

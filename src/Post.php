@@ -48,7 +48,6 @@ class Post
         $sql = "INSERT INTO posts(author_id, content, date) VALUES ($this->author_id, '$this->content', NOW())";
         $result = $connection->query($sql);
         return $result;
-
     }
 
     static public function loadAllPosts(mysqli $connection)
@@ -66,6 +65,43 @@ class Post
                 $loadedPost->date = $row ['date'];
 
                 $ret[] = $loadedPost;
+            }
+
+        }
+        return $ret;
+    }
+
+    static public function loadPostById(mysqli $connection, $id)
+    {
+        $sql = "SELECT * FROM posts where email = $id";
+        $result = $connection->query($sql);
+        if ($result == true and $result->num_rows == 1) {
+            $row = $result->fetch_assoc();
+
+            $loadedPost = new Post();
+            $loadedPost->id = $row['id'];
+            $loadedPost->author_id = $row['author_id'];
+            $loadedPost->content = $row['content'];
+            $loadedPost->date = $row['date'];
+        }
+    }
+
+    public function loadAllPostsByUserId(mysqli $connection)
+    {
+        $sql = "SELECT * FROM posts WHERE author_id = $this->author_id";
+        $ret = [];
+
+        $result = $connection->query($sql);
+        if ($result == true and $result->num_rows > 0) {
+            foreach ($result as $row) {
+
+                $loadedPost = new Post();
+                $loadedPost->id = $row['id'];
+                $loadedPost->author_id = $row['author_id'];
+                $loadedPost->content = $row['content'];
+                $loadedPost->date = $row['date'];
+
+                $ret []= $loadedPost;
             }
 
         }
