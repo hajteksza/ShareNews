@@ -18,7 +18,7 @@ include('navbar.html');
     </div>
 </div>
 </body>
-
+<div style="margin-left: 130px">
 <?php
 require("config/connection.php");
 require("src/Message.php");
@@ -56,6 +56,7 @@ foreach ($messages as $row) {
     }
 }
 ?>
+</div>
 
 </html>
 

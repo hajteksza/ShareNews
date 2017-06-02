@@ -61,7 +61,6 @@ class User
         if ($this->id == -1) {
             $sql = "INSERT INTO users(email, username, hashed_password) VALUES ('$this->email', '$this->username', '$this->hashedPassword')";
             $result = $connection->query($sql);
-            var_dump($result);
             if ($result == true) {
                 $this->id = $connection->insert_id;
                 return true;

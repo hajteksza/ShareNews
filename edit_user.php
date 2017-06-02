@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $result = $conn->query($sql);
         echo "Successfully changed";
     } elseif ($_POST['email']) {
-        $sql = "SELECT * FROM users WHERE email = '" . $_POST['email'] . "'";
+
         $result = $conn->query($sql);
         if($result->num_rows == 0) {
             $sql = "UPDATE users SET email='" . $_POST['email'] . "' WHERE id=" . $_SESSION['userId'];
